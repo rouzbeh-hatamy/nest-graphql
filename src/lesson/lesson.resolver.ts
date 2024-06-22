@@ -8,8 +8,13 @@ export class LessonResolver {
   constructor(private readonly lessonService: LessonService) {}
 
   @Query((_returns) => [LessonType])
-  lesson() {
+  getAllLessons() {
     return this.lessonService.getLessons();
+  }
+
+  @Query((_returns) => LessonType)
+  getLesson(@Args('id', { type: () => String }) id: string) {
+    return this.lessonService.getLesson(id);
   }
 
   @Mutation((_returns) => LessonType)

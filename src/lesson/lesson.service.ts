@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Lesson } from './lesson.entity';
 import { Repository } from 'typeorm';
@@ -12,7 +12,14 @@ export class LessonService {
   ) {}
 
   async getLessons(): Promise<Lesson[]> {
-    const result = await this.lessonRepository.find();
+    return await this.lessonRepository.find();
+  }
+
+  async getLesson(id: string): Promise<Lesson> {
+    const result = await this.lessonRepository.findOne({ where: { id } });
+    if (!result) {
+      throw new NotFoundException('nadariim');
+    }
     return result;
   }
 
