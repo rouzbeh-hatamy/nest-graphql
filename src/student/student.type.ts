@@ -7,7 +7,4 @@ export class StudentType {
 
   @Field()
   name: string;
-
-  @Field()
-  studentLessons: string;
 }

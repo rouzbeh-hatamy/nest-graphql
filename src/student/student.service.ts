@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, In } from 'typeorm';
 import { randomUUID } from 'crypto';
 import { Student } from './student.entity';
 import { CreateStudentInput } from './student.input';
@@ -30,9 +30,18 @@ export class StudentService {
     const student = this.studentRepository.create({
       id: randomUUID(),
       name,
-      studentLessons: '',
     });
 
     return this.studentRepository.save(student);
+  }
+
+  async getManyStudents(studentIds: string[]): Promise<Student[]> {
+    const result = await this.studentRepository.find({
+      where: {
+        id: In(studentIds),
+      },
+    });
+
+    return result;
   }
 }

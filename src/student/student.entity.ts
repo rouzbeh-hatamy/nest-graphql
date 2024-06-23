@@ -10,7 +10,4 @@ export class Student {
 
   @Column()
   name: string;
-
-  @Column()
-  studentLessons: string;
 }
