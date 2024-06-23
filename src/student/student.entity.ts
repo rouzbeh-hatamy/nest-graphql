@@ -1,4 +1,3 @@
-import { Lesson } from 'src/lesson/lesson.entity';
 import { Column, Entity, ObjectIdColumn, PrimaryColumn } from 'typeorm';
 
 @Entity()
@@ -13,5 +12,5 @@ export class Student {
   name: string;
 
   @Column()
-  lessons: [Lesson];
+  studentLessons: string;
 }

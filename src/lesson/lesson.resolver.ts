@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { LessonType } from './lesson.type';
 import { LessonService } from './lesson.service';
@@ -19,8 +18,9 @@ export class LessonResolver {
   }
 
   @Mutation((_returns) => LessonType)
-  createLesson(createLessonInput: CreateLessonInput) {
-    const { name, startDate, endDate } = createLessonInput;
-    return this.lessonService.createLesson(name, startDate, endDate);
+  createLesson(
+    @Args('createLessonInput') createLessonInput: CreateLessonInput,
+  ) {
+    return this.lessonService.createLesson(createLessonInput);
   }
 }
